@@ -1,6 +1,6 @@
-"""Bullseye sign-in. Pure transport — same flow as the Agent-SDK gateway:
-exchange email/password for the JWT Bullseye returns in the Authorization header,
-and fold the active school into the user object so it round-trips per turn."""
+"""Bullseye sign-in. Pure transport: exchange email/password for the JWT Bullseye
+returns in the Authorization header, and fold the active school into the user
+object so it round-trips per turn."""
 
 import logging
 

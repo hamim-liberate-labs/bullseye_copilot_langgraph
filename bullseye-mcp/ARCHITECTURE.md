@@ -59,6 +59,6 @@ Dependency direction: `features → core`; within core, `session/helpers → app
 - **~30–40 tools:** progressive disclosure — expose a lean default tool set and gate
   feature groups behind tags (`include_tags`/`exclude_tags`), or add a `search_tools`
   meta-tool. (Cursor and some clients hard-cap at 40 tools.)
-- **Agent SDK port:** code execution with MCP — expose `features/*/endpoints.py` as an
-  importable code API + a code-execution tool instead of N MCP tools; keep `offload` as
-  the results pattern. The endpoints-as-plain-functions design already enables this.
+- **Code-execution mode:** expose `features/*/endpoints.py` as an importable code API
+  + a code-execution tool instead of N MCP tools; keep `offload` as the results
+  pattern. The endpoints-as-plain-functions design already enables this.

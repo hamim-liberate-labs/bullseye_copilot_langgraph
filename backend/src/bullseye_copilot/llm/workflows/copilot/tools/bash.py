@@ -2,14 +2,12 @@
 Bash / Python execution tool, confined to the conversation workspace.
 
 The agent uses this to aggregate `./data/*.json` with `python3` and to `grep`
-the `./help` snapshot — exactly as in the Agent-SDK build.
+the `./help` snapshot.
 
-⚠️  SECURITY STATUS — read this. The Agent SDK gave us a real OS-level sandbox
-for free (no network, writes confined to the workspace, auto-approved). This
-tool runs commands with `cwd` set to the workspace but does **NOT** yet provide
-those guarantees: a determined command could read outside the workspace or reach
-the network. Per the migration plan this secure sandbox is **Phase 5 — the
-single hardest part of the project** and must be hardened before any real
+⚠️  SECURITY STATUS — read this. This tool runs commands with `cwd` set to the
+workspace but does **NOT** provide an OS-level sandbox: a determined command
+could read outside the workspace or reach the network. This secure sandbox is
+**the single hardest part of the project** and must be hardened before any real
 deployment. Recommended hardening (Linux): run each command inside `bubblewrap`
 or `nsjail` with no network namespace and a read-only bind of only the workspace
 (and ./help), or run the whole backend in a locked-down container.

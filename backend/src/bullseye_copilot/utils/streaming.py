@@ -7,8 +7,8 @@ Reproduces the exact wire signals the frontend already expects (api.ts):
   event: result {ChatResult}      — authoritative final payload
   event: error  {detail}          — failure
 
-So the frontend needs no changes. Includes the <artifact>…</artifact> marker
-suppressor and the human-readable tool labels, ported from the Agent-SDK gateway.
+Includes the <artifact>…</artifact> marker suppressor and the human-readable
+tool labels.
 """
 
 import json

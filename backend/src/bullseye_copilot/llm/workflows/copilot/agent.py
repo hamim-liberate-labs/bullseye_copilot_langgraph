@@ -2,10 +2,9 @@
 Assemble the LangGraph ReAct agent for one chat turn.
 
 Brings together: the per-request model (alias + effort), the full tool set
-(reused Bullseye MCP tools + workspace files + bash + web), the reused system
-prompt, a checkpointer for conversation memory (Phase 7), Anthropic prompt
-caching (cost optimization), and — optionally — the enforced confirm-before-write
-middleware (Phase 6).
+(Bullseye MCP tools + workspace files + bash + web), the system prompt, a
+checkpointer for conversation memory, Anthropic prompt caching (cost
+optimization), and — optionally — the enforced confirm-before-write middleware.
 """
 
 from pathlib import Path

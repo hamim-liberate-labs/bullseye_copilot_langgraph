@@ -1,8 +1,7 @@
 """System-prompt loading + fill.
 
 Uses the bundled prompt file (prompts/bullseye_copilot_system_prompt.md) and
-fills the same `{{...}}` placeholders the Agent-SDK gateway did, so the
-assistant's voice, rules, and persona behaviour are unchanged.
+fills its `{{...}}` placeholders (user, school, current date, base URL) per turn.
 """
 
 from datetime import date
@@ -11,10 +10,10 @@ from bullseye_copilot.core.config import BULLSEYE_BASE_URL, PROMPT_PATH
 
 PROMPT_TEMPLATE = PROMPT_PATH.read_text(encoding="utf-8")
 
-# Backend-only addendum (kept out of the shared prompt file so the Agent-SDK
-# build is unaffected). Artifact HTML is generated as tool-call output, which is
-# the single biggest output-token cost and latency driver — so steer the model
-# to generate it once and to iterate with small edits rather than full rewrites.
+# Backend-only addendum (kept out of the shared prompt file). Artifact HTML is
+# generated as tool-call output, which is the single biggest output-token cost
+# and latency driver — so steer the model to generate it once and to iterate with
+# small edits rather than full rewrites.
 _ARTIFACT_EFFICIENCY_ADDENDUM = """
 
 ## Artifact efficiency (important)

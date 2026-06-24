@@ -79,10 +79,10 @@ DEFAULT_EFFORT = os.getenv("BULLSEYE_EFFORT", "low")
 MAX_TURNS = int(os.getenv("BULLSEYE_MAX_TURNS", "40"))
 RECURSION_LIMIT = MAX_TURNS * 2 + 1
 
-# Confirm-before-write is enforced in the system prompt (prose confirmation),
-# matching the Agent-SDK build exactly. Set to "1" to additionally enable the
-# enforced HumanInTheLoopMiddleware interrupt — but that requires the frontend to
-# support resume (migration plan, Phases 6–7). Off by default.
+# Confirm-before-write is enforced in the system prompt (prose confirmation).
+# Set to "1" to additionally enable the enforced HumanInTheLoopMiddleware
+# interrupt — but that requires the frontend to support resume
+# (Command(resume=…)). Off by default.
 ENABLE_HITL = os.getenv("BULLSEYE_ENABLE_HITL", "0") == "1"
 
 # ── Cost controls ─────────────────────────────────────────────────────────────

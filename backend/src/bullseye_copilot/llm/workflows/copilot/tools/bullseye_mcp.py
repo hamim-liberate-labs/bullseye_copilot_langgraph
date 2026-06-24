@@ -1,13 +1,13 @@
 """
-Bullseye data tools — the existing MCP server, reused as-is (migration plan,
-Phase 2). We spawn `bullseye-mcp/server.py` over stdio with a per-request,
-per-user env (JWT + workspace + active school) and adapt its tools into
-LangChain via `langchain-mcp-adapters`. None of the careful endpoint, offload,
-or pagination work is rewritten — only the transport changes.
+Bullseye data tools — the bundled MCP server (`bullseye-mcp/`). We spawn
+`bullseye-mcp/server.py` over stdio with a per-request, per-user env (JWT +
+workspace + active school) and adapt its tools into LangChain via
+`langchain-mcp-adapters`. The server owns all the endpoint, offload, and
+pagination logic; this module only handles transport and the tool allowlist.
 
 One stdio subprocess lives for the duration of one chat turn (the async context
-manager below), mirroring how the Agent SDK spawned the MCP server per query.
-User JWTs never cross turns because each turn gets its own subprocess + env.
+manager below). User JWTs never cross turns because each turn gets its own
+subprocess + env.
 """
 
 import logging
@@ -22,9 +22,9 @@ from bullseye_copilot.core.config import MCP_DIR, MCP_PYTHON, MCP_SERVER
 
 log = logging.getLogger("copilot.mcp")
 
-# The read/write tools the agent is allowed to use — the exact allowlist the
-# Agent-SDK gateway granted. `get_auth_token` (token injected via env) and
-# `set_active_school` (school injected via env) are intentionally excluded.
+# The read/write tools the agent is allowed to use. `get_auth_token` (token
+# injected via env) and `set_active_school` (school injected via env) are
+# intentionally excluded.
 ALLOWED_TOOLS = {
     "get_school_context",
     "list_sessions",

@@ -4,8 +4,8 @@ process-default session lifecycle.
 
 Pure transport: auth state, the pooled httpx client, and the verbs features call
 (`get`, `write`, `safe_get`). Domain parsing lives in feature `endpoints.py`. The
-stdio harness uses one default session (`session()`); under the Agent SDK, build
-one per connection so user JWTs never cross sessions.
+server uses one process-default session (`session()`); the gateway spawns a fresh
+subprocess per chat turn, so each user's JWT stays in its own process.
 """
 
 import os
@@ -145,8 +145,8 @@ _session: Optional[BullseyeSession] = None
 
 
 def session() -> BullseyeSession:
-    """Process-default session (lazy shared client). Under the Agent SDK, swap for
-    a per-connection lookup so each user gets an isolated session + JWT."""
+    """Process-default session (lazy shared client). Isolation comes from the
+    gateway spawning one subprocess per chat turn, each with its own JWT in env."""
     global _session
     if _session is None:
         client = httpx.AsyncClient(base_url=BASE, timeout=TIMEOUT)

@@ -1,1 +1,1 @@
-"""Agent tools: Bullseye data (via the reused MCP server), workspace files, bash, web."""
+"""Agent tools: Bullseye data (via the bundled MCP server), workspace files, bash, web."""

@@ -5,7 +5,7 @@ langgraph>=1.0,<2.0
 langchain-anthropic>=1.0,<2.0
 langchain-openai>=1.0,<2.0
 
-# Reuse the existing Bullseye MCP server over stdio (migration plan, Phase 2).
+# Adapts the bundled Bullseye MCP server (spawned over stdio) into LangChain tools.
 langchain-mcp-adapters>=0.1.0
 
 # Tracing/observability. The default .env enables LangSmith (LANGSMITH_TRACING=true),

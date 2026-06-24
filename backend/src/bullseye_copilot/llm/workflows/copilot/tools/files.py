@@ -1,10 +1,9 @@
 """
 Workspace-scoped file tools (Read / Write / Edit).
 
-These replace the Agent SDK's built-in file tools and reproduce its isolation
-boundary: the agent may only touch paths **inside its per-conversation
-workspace** (plus read-only access to the help-center snapshot). Absolute paths
-outside the workspace and `..` escapes are refused — the same guarantee
+The agent may only touch paths **inside its per-conversation workspace** (plus
+read-only access to the help-center snapshot). Absolute paths outside the
+workspace and `..` escapes are refused — the guarantee
 `tests/unit/test_file_scope.py` asserts.
 
 Tools are built per request as closures bound to that request's workdir, so two

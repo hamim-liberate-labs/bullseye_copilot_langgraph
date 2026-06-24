@@ -2,8 +2,8 @@
 Bullseye Copilot — MCP server entry point.
 
 The tool layer for the Bullseye Copilot: 12 tools (auth bootstrap, read GETs,
-write POST/PATCH/DELETEs, plus a local set_active_school). Carries forward to the
-Anthropic Agent SDK — only the transport changes.
+write POST/PATCH/DELETEs, plus a local set_active_school). The gateway spawns this
+server over stdio and adapts its tools into LangChain.
 
 Layout:
   core/                shared infra: app (config + FastMCP), session (HTTP I/O), helpers

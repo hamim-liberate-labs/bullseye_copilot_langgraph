@@ -3,17 +3,17 @@ Confirm-before-write — the "ask before changing data" safety rule.
 
 Two ways to enforce it:
 
-1. **Prose confirmation (default, matches the Agent-SDK build).** The system
-   prompt already requires the assistant to state the change in plain language
-   and wait for the user to say yes before calling `next_steps_write`. This keeps
-   the one-shot streaming turn loop intact and needs no frontend changes.
+1. **Prose confirmation (default).** The system prompt already requires the
+   assistant to state the change in plain language and wait for the user to say
+   yes before calling `next_steps_write`. This keeps the one-shot streaming turn
+   loop intact and needs no frontend changes.
 
-2. **Enforced interrupt (migration plan, Phase 6 — opt-in via BULLSEYE_ENABLE_HITL).**
+2. **Enforced interrupt (opt-in via BULLSEYE_ENABLE_HITL).**
    `HumanInTheLoopMiddleware` hard-pauses the graph before `next_steps_write`,
    surfacing the pending call for approval. This is a genuine safety upgrade, but
    it requires a checkpointer (we have one) AND a frontend that can resume the
    thread with `Command(resume=...)`. The current frontend cannot, so it is OFF
-   by default. Wire the resume path (Phases 6–7) before enabling.
+   by default. Wire the resume path before enabling.
 """
 
 import logging

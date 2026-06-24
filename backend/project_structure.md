@@ -1,9 +1,9 @@
 # Project Structure
 
 Bullseye Copilot Backend — a FastAPI service that runs the Bullseye Copilot on
-**LangGraph + LangChain v1**, replacing the Claude Agent SDK engine while keeping
-the HTTP contract, streaming signals, and frontend unchanged. Layout follows the
-same `src/<package>/` convention as the FortunAI backend.
+**LangGraph + LangChain v1**: a ReAct agent over the Bullseye data tools and a
+per-chat file/bash/web workspace, streamed to the frontend over SSE. Layout
+follows the `src/<package>/` convention.
 
 ```
 langgraph-copilot/backend/
@@ -45,9 +45,9 @@ langgraph-copilot/backend/
 │   │           ├── agent.py          # create_agent() assembly + shared checkpointer
 │   │           ├── middleware.py     # confirm-before-write (optional enforced HITL)
 │   │           └── tools/
-│   │               ├── bullseye_mcp.py  # reused MCP server → LangChain tools (Phase 2)
-│   │               ├── files.py         # workspace-scoped Read/Write/Edit (Phase 4)
-│   │               ├── bash.py          # workspace-confined shell/python (Phase 5*)
+│   │               ├── bullseye_mcp.py  # bundled MCP server → LangChain tools
+│   │               ├── files.py         # workspace-scoped Read/Write/Edit
+│   │               ├── bash.py          # workspace-confined shell/python (*see note)
 │   │               └── web.py           # web_fetch + optional Tavily web_search
 │   │
 │   ├── services/                     # external integrations
@@ -97,5 +97,5 @@ frontend ──POST /api/chat/stream──▶ api/v1/endpoints/chat.py
 > (file-tool isolation boundary); **`session_id`** is the LangGraph `thread_id`
 > used by the checkpointer for conversation memory.
 >
-> *Phase 5: the Bash tool is `cwd`-confined but not yet an OS-level sandbox — see
-> the security note in `tools/bash.py` and the top-level README.*
+> *The Bash tool is `cwd`-confined but not yet an OS-level sandbox — see the
+> security note in `tools/bash.py` and the top-level README.*

@@ -1,5 +1,4 @@
-"""Path-confinement tests for the workspace file tools — the LangGraph
-equivalent of the Agent-SDK build's tests/test_permissions.py.
+"""Path-confinement tests for the workspace file tools.
 
 These invoke the tools directly (no LLM, no API key needed):
     python -m pytest tests/unit/test_file_scope.py

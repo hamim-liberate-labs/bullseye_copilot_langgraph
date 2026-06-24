@@ -2,8 +2,8 @@
 
 FastMCP server exposing the Bullseye Copilot tool layer: **12 tools** (1 auth
 bootstrap, 8 read GETs, the 2-tool `next_steps` read/write pair that dispatches
-8 next-step endpoints, plus a local `set_active_school`). This is the layer that
-carries forward into the Anthropic Agent SDK — only the transport changes.
+8 next-step endpoints, plus a local `set_active_school`). The gateway spawns it
+over stdio and adapts its tools into LangChain (`langchain-mcp-adapters`).
 
 The server is organised into a shared `core/` (transport + infra) and one package
 per Bullseye feature under `features/`, so it scales as more of the API is wired in.
@@ -118,9 +118,9 @@ the read-only vs destructive annotation stays honest. The agent picks the `actio
 
 ## Cross-cutting behaviour (all in `core/`)
 
-- **State is encapsulated in `BullseyeSession`, not globals.** The stdio harness
-  uses one default session; under the SDK build one per connection (see
-  `core.session.session()`) so user JWTs never cross sessions.
+- **State is encapsulated in `BullseyeSession`, not globals.** The server uses one
+  process-default session (see `core.session.session()`); the gateway spawns a
+  fresh subprocess per chat turn, so user JWTs never cross turns.
 - **One pooled httpx client** with an explicit timeout.
 - **Errors surface as `ToolError`** — every call checks status; a 401 on a
   password session re-authenticates once and retries (self-healing JWT). Token-

@@ -1,10 +1,10 @@
 """
 Chat endpoints — the heart of the gateway.
 
-Same HTTP contract as the Agent-SDK build (`/api/chat`, `/api/chat/stream`), so
-the existing frontend is unchanged. Each turn builds a LangGraph ReAct agent over
-the reused Bullseye MCP tools plus the workspace file/bash/web tools, and streams
-its output as the SSE events the frontend already parses.
+Exposes `/api/chat` and `/api/chat/stream`, the contract the frontend talks to.
+Each turn builds a LangGraph ReAct agent over the Bullseye MCP tools plus the
+workspace file/bash/web tools, and streams its output as the SSE events the
+frontend parses.
 
 Two ids per conversation:
   • chat_id    — the artifact workspace folder (file-tool isolation boundary)

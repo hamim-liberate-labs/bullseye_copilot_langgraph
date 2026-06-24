@@ -1,11 +1,11 @@
 """
 Windows command shims for the bash tool.
 
-The system prompt (shared with the Agent-SDK build, which ran in a unix-like
-sandbox) tells the agent to use `python3` and `grep`. On Windows neither exists
-on the default `cmd.exe` PATH (`python` exists, `python3`/`grep` do not). Rather
-than fork the prompt, we materialise a tiny shim directory and prepend it to the
-subprocess PATH so those exact commands resolve:
+The system prompt (written for a unix-like environment) tells the agent to use
+`python3` and `grep`. On Windows neither exists on the default `cmd.exe` PATH
+(`python` exists, `python3`/`grep` do not). Rather than fork the prompt, we
+materialise a tiny shim directory and prepend it to the subprocess PATH so those
+exact commands resolve:
 
   • python3 → the current backend interpreter (sys.executable)
   • grep    → a minimal Python implementation covering `-r`, `-i`, `-n`

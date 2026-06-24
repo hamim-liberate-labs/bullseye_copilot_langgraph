@@ -1,9 +1,8 @@
 """
 Per-conversation artifact workspace: the file-tool isolation boundary.
 
-Mirrors the Agent-SDK gateway's workspace handling 1:1 — a private folder per
-chat_id, the help-center snapshot surfaced as ./help, plus the artifact-marker
-extraction and scanning the frontend's side panel depends on.
+A private folder per chat_id, the help-center snapshot surfaced as ./help, plus
+the artifact-marker extraction and scanning the frontend's side panel depends on.
 """
 
 import logging

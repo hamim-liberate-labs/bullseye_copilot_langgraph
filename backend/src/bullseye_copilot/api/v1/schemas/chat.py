@@ -1,5 +1,5 @@
-"""Chat request model. Matches the Agent-SDK gateway's contract exactly so the
-existing frontend (frontend/src/lib/api.ts) talks to this backend unchanged."""
+"""Chat request model — the contract the frontend (frontend/src/lib/api.ts)
+talks to this backend with."""
 
 from pydantic import BaseModel
 
