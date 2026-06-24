@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+@theme {
+  /* Bullseye brand — editorial greenhouse */
+  --color-ink: #20251f; /* charcoal chrome, warmed toward green */
+  --color-ink-soft: #2c322a;
+  --color-ink-line: #3a4038;
+  --color-paper: #faf9f4; /* warm paper, not sterile white */
+  --color-paper-raised: #ffffff;
+  --color-paper-sunken: #f1efe7;
+  --color-leaf: #0f9200; /* logo green — brand ink */
+  --color-leaf-deep: #0b6b02;
+  --color-leaf-bright: #3fae49; /* product CTA green */
+  --color-leaf-wash: #e8f3e4;
+  --color-sage: #c3d1cf; /* logo secondary */
+  --color-clay: #b65c2e; /* sparing warm counterpoint */
+  --color-line: #e3e0d4;
+  --color-ink-on-paper: #2a2e28;
+  --color-muted: #6f7569;
+
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Schibsted Grotesk", "Helvetica Neue", sans-serif;
+  --font-mono: "Spline Sans Mono", "SFMono-Regular", monospace;
+
+  --shadow-card: 0 1px 2px rgb(32 37 31 / 0.05), 0 4px 16px rgb(32 37 31 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(32 37 31 / 0.08), 0 12px 32px rgb(32 37 31 / 0.12);
+
+  --animate-rise: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-radar: radar 2.2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+  --animate-ring-drift: ring-drift 80s linear infinite;
+  --animate-blink: blink 1.1s steps(2, start) infinite;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes radar {
+    0% {
+      transform: scale(0.45);
+      opacity: 0.85;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+  @keyframes ring-drift {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-paper);
+  color: var(--color-ink-on-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Paper grain — keeps the light theme from feeling flat */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.022 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Concentric bullseye rings — the brand motif as atmosphere */
+.rings {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1px solid currentColor;
+  pointer-events: none;
+}
+
+/* Markdown prose inside assistant messages */
+.prose-bullseye {
+  line-height: 1.62;
+  font-size: 0.9375rem;
+}
+.prose-bullseye > * + * {
+  margin-top: 0.7em;
+}
+.prose-bullseye h1,
+.prose-bullseye h2,
+.prose-bullseye h3 {
+  font-family: var(--font-display);
+  font-weight: 560;
+  color: var(--color-ink);
+  line-height: 1.25;
+  margin-top: 1.1em;
+}
+.prose-bullseye h1 {
+  font-size: 1.25rem;
+}
+.prose-bullseye h2 {
+  font-size: 1.125rem;
+}
+.prose-bullseye h3 {
+  font-size: 1rem;
+}
+.prose-bullseye strong {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+.prose-bullseye a {
+  color: var(--color-leaf-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-leaf) 40%, transparent);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s;
+}
+.prose-bullseye a:hover {
+  text-decoration-color: var(--color-leaf);
+}
+.prose-bullseye ul,
+.prose-bullseye ol {
+  padding-left: 1.3em;
+}
+.prose-bullseye ul {
+  list-style: none;
+}
+.prose-bullseye ul li {
+  position: relative;
+  margin-top: 0.35em;
+}
+.prose-bullseye ul li::before {
+  content: "";
+  position: absolute;
+  left: -1.15em;
+  top: 0.58em;
+  width: 0.42em;
+  height: 0.42em;
+  border-radius: 9999px;
+  border: 1.5px solid var(--color-leaf);
+}
+.prose-bullseye ol {
+  list-style: decimal;
+}
+.prose-bullseye ol li {
+  margin-top: 0.35em;
+}
+.prose-bullseye code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--color-paper-sunken);
+  border: 1px solid var(--color-line);
+  border-radius: 0.3rem;
+  padding: 0.08em 0.35em;
+}
+.prose-bullseye table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin-top: 0.9em;
+}
+.prose-bullseye th {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--color-muted);
+  border-bottom: 2px solid var(--color-ink);
+  padding: 0.45em 0.75em 0.45em 0;
+}
+.prose-bullseye td {
+  border-bottom: 1px solid var(--color-line);
+  padding: 0.55em 0.75em 0.55em 0;
+  vertical-align: top;
+}
+.prose-bullseye blockquote {
+  border-left: 3px solid var(--color-leaf);
+  padding-left: 1em;
+  color: var(--color-muted);
+  font-style: italic;
+}
+.prose-bullseye hr {
+  border: 0;
+  border-top: 1px solid var(--color-line);
+  margin: 1.2em 0;
+}
+
+/* Custom scrollbar — quiet, on-theme */
+.scroll-quiet::-webkit-scrollbar {
+  width: 10px;
+}
+.scroll-quiet::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 9999px;
+  border: 3px solid var(--color-paper);
+}
+.scroll-quiet::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sage);
+}

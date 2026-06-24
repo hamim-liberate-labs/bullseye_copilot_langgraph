@@ -1,0 +1,17 @@
+# Per-conversation artifact workspaces (agent-generated; not source)
+artifacts/
+
+# Secrets (never commit; copy the .example files and fill in)
+.env
+backend/.env
+bullseye-mcp/.env
+
+# Python
+backend/.venv/
+bullseye-mcp/.venv/
+__pycache__/
+*.pyc
+
+# Node / Vite
+frontend/node_modules/
+frontend/dist/
